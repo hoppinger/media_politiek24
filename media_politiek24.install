@@ -1,0 +1,20 @@
+<?php
+
+/*
+ * Set generic thumbnail image for Politiek24 videos.
+ */
+function media_politiek24_install() {
+  $image_path = DRUPAL_ROOT . DIRECTORY_SEPARATOR . drupal_get_path('module', 'media_politiek24') . DIRECTORY_SEPARATOR . 'politiek24.png';
+  if (!file_exists($image_path)) {
+    return;
+  }
+
+  $file = (object) array(
+    'uid' => 1,
+    'uri' => $image_path,
+    'filemime' => file_get_mimetype($image_path),
+    'status' => 1,
+  );
+
+  $file = file_copy($file, 'public://');
+}
